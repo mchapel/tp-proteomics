@@ -161,37 +161,143 @@ La fonction `read_csv` accepte différents [arguments](https://pandas.pydata.org
 
 ```python
 df = pandas.read_csv()
+
+df = pandas.read_csv('data/TCL_wt1.tsv',delimiter='\t')
 ```
 
 Quel est le type de l'objet `df`?
 ```
-
+Un data frame
 ```
 
 ##### Descriptions d'une table de données
 Que permettent les méthodes suivantes?
 ###### df.shape
 ```
+Dimension de la data frame
+(2024, 7)
 ```
 ###### df.head()
 ```
+renvoi les premières lignes du tableau
+
 ```
 ###### df.tail()
 ```
+renvoi les dernières lignes du tableau
+
+A
 ```
 ###### df.columns
+Donne le label des colonnes
+Index(['Accession\tDescription\tGene Symbol\tCorrected Abundance ratio (1.53)\tLog2 Corrected Abundance Ratio\tAbundance Ratio Adj. P-Value: (127. T3 Tc WT) / (126. T0 WT)\t-LOG10 Adj.P-val'], dtype='object')
+
 ```
 ```
 ###### df.dtypes
+revoi les type de chaque colonne
+Accession                                                        object
+Description                                                      object
+Gene Symbol                                                      object
+Corrected Abundance ratio (1.53)                                 object
+Log2 Corrected Abundance Ratio                                   object
+Abundance Ratio Adj. P-Value: (127. T3 Tc WT) / (126. T0 WT)    float64
+-LOG10 Adj.P-val                                                 object
+dtype: object
 ```
 ```
 ###### df.info
-```
+<bound method DataFrame.info of      Accession                                        Description Gene Symbol  \
+0       P75936  Basal-body rod modification protein FlgD OS=Es...        flgD   
+1       P76231  Uncharacterized protein YeaC OS=Escherichia co...        yeaC   
+2       P0A8S9  Flagellar transcriptional regulator FlhD OS=Es...        flhD   
+3       P0CE48  Elongation factor Tu 2 OS=Escherichia coli (st...        tufB   
+4       P05706  PTS system glucitol/sorbitol-specific EIIA com...        srlB   
+...        ...                                                ...         ...   
+2019    P24240  6-phospho-beta-glucosidase AscB OS=Escherichia...        ascB   
+2020    P0A917  Outer membrane protein X OS=Escherichia coli (...        ompX   
+2021    P02931  Outer membrane protein F OS=Escherichia coli (...        ompF   
+2022    P0AB40  Multiple stress resistance protein BhsA OS=Esc...        bhsA   
+2023    P76042  Putative ABC transporter periplasmic-binding p...        ycjN   
+
+     Corrected Abundance ratio (1.53) Log2 Corrected Abundance Ratio  \
+0                         0.075816993                   -3.721334942   
+1                         0.092810458                   -3.429568818   
+2                         0.102614379                   -3.284695189   
+3                            #VALEUR!                       #VALEUR!   
+4                         0.108496732                   -3.204276506   
+...                               ...                            ...   
+2019                         #VALEUR!                       #VALEUR!   
+2020                      1.579738562                     0.65968582   
+2021                      1.754901961                    0.811390435   
+2022                      1.798039216                    0.846424487   
+2023                         #VALEUR!                       #VALEUR!   
+
+      Abundance Ratio Adj. P-Value: (127. T3 Tc WT) / (126. T0 WT)  \
+0                                              0.000055              
+1                                              0.000351              
+2                                              0.000027              
+3                                                   NaN              
+4                                              0.019963              
+...                                                 ...              
+2019                                                NaN              
+2020                                           0.002226              
+2021                                           0.000068              
+2022                                           0.035928              
+2023                                                NaN              
+
+     -LOG10 Adj.P-val  
+0         4.260067469  
+1          3.45462743  
+2         4.571899347  
+3            #VALEUR!  
+4         1.699767669  
+...               ...  
+2019         #VALEUR!  
+2020      2.652390664  
+2021       4.16495627  
+2022      1.444561032  
+2023         #VALEUR!  
+
+[2024 rows x 7 columns]>
 ```
 ###### df.describe()
+
+
+Abundance Ratio Adj. P-Value: (127. T3 Tc WT) / (126. T0 WT)
+
+
+
+count
+1.750000e+03 
+
+mean
+8.238311e-01 
+
+std
+3.506349e-01 
+
+min
+1.034030e-08 
+
+25%
+1.000000e+00 
+
+50%
+1.000000e+00 
+
+75%
+1.000000e+00 
+
+max
+1.000000e+00 
+
+
 ```
 ```
 ###### df.dropna()
+Elimine des lignes qui contient des valeurs abbérantes
+
 ```
 ```
 
@@ -202,6 +308,10 @@ values = df[['Description', 'Gene Symbol']]
 ```
 
 Quel est le type de `values` ?
+"""
+type(values)
+pandas.core.frame.DataFrame
+"""
 
 Verifiez si certaines méthodes de `DataFrame` lui sont applicables.
 Ce type supporte l'accès par indice et les slice `[a:b]`
@@ -212,16 +322,19 @@ On peut accéder aux valeurs du DataFrame via des indices ou plages d'indice. La
 Il y a différentes manières de le faire, l'utilisation de `.iloc[slice_ligne,slice_colonne]` constitue une des solutions les plus simples. N'oublions pas que shape permet d'obtenir les dimensions (lignes et colonnes) du DataFrame.
 ###### Acceder aux cinq premières lignes de toutes les colonnes
 ```python
+df.iloc[:5,:]
 
 ```
 
 ###### Acceder à toutes les lignes de la dernière colonne
 ```python
+df.iloc[:,-1:]
 
 ```
 
 ###### Acceder aux cinq premières lignes des colonnes 0, 2 et 3
 ```python
+df.iloc[:5,[0,2,3]]
 
 ```
 
